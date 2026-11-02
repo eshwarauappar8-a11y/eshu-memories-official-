@@ -1,0 +1,20 @@
+{
+  "_comment": "ADD these nodes inside your existing  \"rules\": { ... }  (keep everything else). Cloud Functions use the Admin SDK and bypass rules.",
+
+  "fcmTokens": {
+    "$uid": {
+      ".read": "auth != null && auth.uid === $uid",
+      ".write": "auth != null && auth.uid === $uid"
+    }
+  },
+  "notifications": {
+    "$uid": {
+      ".read": "auth != null && auth.uid === $uid",
+      ".write": "auth != null && (auth.uid === $uid || root.child('admins').child(auth.uid).exists())"
+    }
+  },
+  "notifyLog": {
+    ".read": false,
+    ".write": false
+  }
+}
